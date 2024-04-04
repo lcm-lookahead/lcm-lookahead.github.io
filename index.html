@@ -81,7 +81,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2302.12228"
+                <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -92,12 +92,12 @@
 
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://tuning-encoder.github.io/"
+                <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code (Coming by April 30th)</span>
+                  <span>Code (Coming by 04/30/24)</span>
                   </a>
               </span>
 
@@ -111,7 +111,7 @@
                   </a>
               </span>
 
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://tuning-encoder.github.io/"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -119,7 +119,7 @@
                   </span>
                   <span>Synthetic Dataset</span>
                   </a>
-              </span>
+              </span> -->
 
 
             </div>
@@ -205,7 +205,7 @@
         <h4 class="title is-4">LCM-Lookahead</h4>
         <div class="column is-centered has-text-centered">
           <div class="content has-text-justified">
-            GAN inversion papers showed significant improvement when augmenting the standard reconstruction goal with image-space perceptual losses, such as an identity loss. We want to do use similar losses for diffusion personalization, but diffusion training operates on intermediate noisy images, and their "clean" approximations are often still noisy, blurred, and full of artifacts.
+            GAN inversion papers showed significant improvement when augmenting the standard reconstruction goal with image-space perceptual losses, such as an identity loss. We want to use similar losses for diffusion personalization, but diffusion training operates on intermediate noisy images, and their "clean" approximations are often still noisy, blurred, and full of artifacts.
             We overcome this limitation by leveraging the alignment between diffusion models and their distilled consistency model versions, essentially using LCM-LoRA to create cleaner "previews" of the final diffusion output.
         </div>
 
@@ -267,9 +267,9 @@
       </div>
 
       <img id="styles" src="static/images/results.jpg"/>
-    <div class="content is-four-fifths has-text-justified">
-        <p>Our approach works for non-facial domains, and even extends to abstract concepts like artistic styles. Here, we show results with encoders trained on WikiArt (left) and LSUN-Cat (right) respectively.</p>
-        <br>
+    <div class="content is-four-fifths has-text-centered"><small>
+      Personalized images generated using our approach with unseen images from the Unsplash-50 set. Our model was tuned from an IP-Adapter-Plus-Face-SDXL model.
+    </small>
     </div>
       <!--/ New domain editing. -->
   </div>
@@ -278,19 +278,18 @@
 
 
 <section class="section">
-  <div class="container is-widescreen">
+  <div class="container is-max-desktop has-text-centered">
     <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+
         <h2 class="title is-3">Comparisons to Prior Work</h2>
         <div class="content has-text-justified">
-          We compare our method with prior SDXL encoder-based personalization works. For all methods except for PhotoMaker, we generated a single image for each input and prompt pair. For PhotoMaker, we generated two and chose the one that performed better. All baselines use their HuggingFace spaces implementations, with any additional controlnets or negative prompts disabled. IP-A refers to IP-Adapter-Plus-Face-SDXL, tested with adapter scales of 0.5 and 1.0.
+          We compare our method with prior SDXL encoder-based personalization works. For all methods except for PhotoMaker, we generated a single image for each input and prompt pair. For PhotoMaker, we generated two and chose the one that performed better. All baselines use their HuggingFace spaces implementations, with any additional controlnets or negative prompts disabled. IP-A refers to IP-Adapter-Plus-Face-SDXL (our backbone), tested with adapter scales of 0.5 and 1.0.
         </div>
         <div class="column is-centered has-text-centered is-widescreen">
         <img id="face_comps" src="static/images/comparisons.jpg"/>
       </div>
         <div class="content has-text-centered"><small>
-            Comparisons to prior SDXL encoder-based personalization works on unseen images from Unsplash.
+            Comparisons to prior SDXL encoder-based personalization works on unseen images from Unsplash-50.
           </small>
         </div>
 
@@ -311,9 +310,6 @@
           </small>
         </div>
 
-
-      </div>
-    </div>
     <!--/ Abstract. -->
   </div>
 </section>
