@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="LCM-Lookahead for Encoder-based Text-to-Image Personalization">
+  <meta name="keywords" content="IP-Adapter, Face Encoder, Text-to-Image, Personalized Generation">
+  <meta name="viewport" content="width=device-width, initial-scale=0.1">
+  <title>LCM-Lookahead for Encoder-based Text-to-Image Personalization</title>
+
+<!--   Global site tag (gtag.js) - Google Analytics-->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVM9XP0Q0C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-QVM9XP0Q0C');
+  </script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">LCM-Lookahead for Encoder-based Text-to-Image Personalization</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://rinongal.github.io/">Rinon Gal*</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/or-lichter-687867129/">Or Lichter*</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://eladrich.github.io/">Elad Richardson*</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://orpatashnik.github.io/">Or Patashnik</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.cs.tau.ac.il/~amberman/">Amit H. Bermano</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://research.nvidia.com/person/gal-chechik">Gal Chechik</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.cs.tau.ac.il/~dcor/">Daniel Cohen-Or</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Tel Aviv University,</span>
+            <span class="author-block"><sup>2</sup>NVIDIA</span>
+            
+            <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+          </div>
+
+
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2302.12228"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://tuning-encoder.github.io/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming by April 30th)</span>
+                  </a>
+              </span>
+
+              <span class="link-block">
+                <a href="static/unsplash_50.txt"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Unsplash-50 Images</span>
+                  </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://tuning-encoder.github.io/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Synthetic Dataset</span>
+                  </a>
+              </span>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-widescreen">
+    <div class="container is-max-desktop is-centered has-text-centered">
+      <h2 class="subtitle">
+	 TL;DR: We get better image-space losses for personalization training by using the alignment between SDXL and LCM-LoRA to create clean image previews. </h2><br> 
+      </div>
+    <br>
+    <div class="hero-body">
+      <!-- <div id="results-carousel" class="carousel results-carousel"> -->
+      <div class="container">
+      <div class="item">
+      <div class="column is-centered has-text-centered">
+        <img src="static/images/teaser.JPG" alt="Teaser."/>
+	  </div>
+    </div>
+  </div>
+ <!--  </div> -->
+  </div>
+  </div>
+ <!--  </div> -->
+</section>
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- div class="item">
+          <p style="margin-bottom: 30px">
+        <video poster="" id="tree" autoplay controls muted loop height="100%">
+          <source src="static/figures/video.mp4"
+          type="video/mp4">
+        </video>
+        </p>
+        </div -->
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+<p>
+  Recent advancements in diffusion models have introduced fast sampling methods that can effectively produce high-quality images in just one or a few
+  denoising steps. Interestingly, when these are distilled from existing diffusion  models, they often maintain alignment with the original model, retaining
+  similar outputs for similar prompts and seeds. These properties present opportunities to leverage fast sampling methods as a shortcut-mechanism,
+  using them to create a preview of denoised outputs through which we can backpropagate image-space losses. In this work, we explore the potential
+  of using such shortcut-mechanisms to guide the personalization of text-to-image models to specific facial identities. We focus on encoder-based
+  personalization approaches, and demonstrate that by tuning them with a lookahead identity loss, we can achieve higher identity fidelity, without
+  sacrificing layout diversity or prompt alignment. We further explore the use of attention sharing mechanisms and consistent data generation for the task
+  of personalization, and find that encoder training can benefit from both.
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">How does it work?</h2>
+        <div class="content has-text-justified">
+        </div>
+
+        <div class="content has-text-justified">
+          We fine-tune an IP-Adapter model using an LCM-based "lookahead" identity loss, consistently generated synthetic data, and a self-attention sharing module in order to improve identity preservation and prompt-alignment.
+      </div>
+      
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths has-text-centered">
+        <h4 class="title is-4">LCM-Lookahead</h4>
+        <div class="column is-centered has-text-centered">
+          <div class="content has-text-justified">
+            GAN inversion papers showed significant improvement when augmenting the standard reconstruction goal with image-space perceptual losses, such as an identity loss. We want to do use similar losses for diffusion personalization, but diffusion training operates on intermediate noisy images, and their "clean" approximations are often still noisy, blurred, and full of artifacts.
+            We overcome this limitation by leveraging the alignment between diffusion models and their distilled consistency model versions, essentially using LCM-LoRA to create cleaner "previews" of the final diffusion output.
+        </div>
+
+        <img id="architecture" src="static/images/alignment.JPG"/>
+      </div>
+        <div class="content has-text-centered"><small>
+            LCM-LoRA predictions closely align with the results of a full DDPM denoising proccess. This also holds for personalized models.
+          </small>
+        </div>
+
+        <div class="content has-text-justified">
+          The key idea is to simply use these LCM previews in place of the standard (e.g., DDPM or DDIM) single-step denoising approximations.
+          This provides a cleaner signal in early diffusion timesteps, improving the performance of end-to-end guidance or training losses. For technical details needed to make this work, please read the paper.
+      </div>
+      <img id="loss" src="static/images/lh_loss_drake.jpg"/>
+      </div>
+
+      <div class="column is-four-fifths has-text-centered">
+        <h4 class="title is-4">Consistent Data</h4>
+        <div class="column is-centered has-text-centered">
+          <div class="content has-text-justified">
+           We fine-tune the baseline IP-Adapter using synthetic data. To generate the data, we abuse SDXL Turbo's mode collapse, which leads it to generate nearly fixed identities for sufficiently complex subject descriptions (e.g., "aboriginal australian male with narrow eyes and chubby cheeks and wavy hair and hair bun and brown hair"). This lets us create the same individual in many styles and settings, preventing the encoder from collapsing to photo-realism.
+        </div>
+
+        <img id="architecture" src="static/images/consistent_data.jpg"/>
+
+        <div class="content has-text-centered"><small>
+          Consistent identities in multiple styles, generated by leveraging SDXL Turbo's mode collapse.
+        </small>
+      </div>
+      </div>
+      <br>
+        <h4 class="title is-4">Attention Sharing</h4>
+        <!-- <div class="column is-centered has-text-centered"> -->
+          <div class="content has-text-justified">
+           We follow recent appearance transfer and editing work, and share self-attention features between the target identity image and the image generated under the new prompt. This improves identity similarity, at the cost of some editability.
+        </div>
+        <img id="architecture" src="static/images/extended_sa.jpg"/>
+        <div class="content has-text-centered"><small>
+          Self-attention keys and values are extracted from a copy of the denoising U-Net which operates on a noised conditioning image. These are concatenated to the keys and values of the newly generated images. The KV extraction network is optimized w/ LoRA.
+        </small>
+
+
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+
+<section class="hero is-light is-small">
+  <div class="container is-max-desktop is-centered">
+
+      <div class="section-title is-centered has-text-centered">
+        <br>
+        <h2 class="title is-3 is-centered">Results</h2>
+        <div class="content has-text-justified">
+        </div>
+      </div>
+
+      <img id="styles" src="static/images/results.jpg"/>
+    <div class="content is-four-fifths has-text-justified">
+        <p>Our approach works for non-facial domains, and even extends to abstract concepts like artistic styles. Here, we show results with encoders trained on WikiArt (left) and LSUN-Cat (right) respectively.</p>
+        <br>
+    </div>
+      <!--/ New domain editing. -->
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-widescreen">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Comparisons to Prior Work</h2>
+        <div class="content has-text-justified">
+          We compare our method with prior SDXL encoder-based personalization works. For all methods except for PhotoMaker, we generated a single image for each input and prompt pair. For PhotoMaker, we generated two and chose the one that performed better. All baselines use their HuggingFace spaces implementations, with any additional controlnets or negative prompts disabled. IP-A refers to IP-Adapter-Plus-Face-SDXL, tested with adapter scales of 0.5 and 1.0.
+        </div>
+        <div class="column is-centered has-text-centered is-widescreen">
+        <img id="face_comps" src="static/images/comparisons.jpg"/>
+      </div>
+        <div class="content has-text-centered"><small>
+            Comparisons to prior SDXL encoder-based personalization works on unseen images from Unsplash.
+          </small>
+        </div>
+
+        <div class="column is-centered has-text-centered is-widescreen">
+          <img id="face_comps" src="static/images/comparisons_celebs.JPG"/>
+        </div>
+        <div class="content has-text-centered"><small>
+          Comparisons to prior SDXL encoder-based personalization works on celebrity images.
+        </small>
+      </div>
+
+          <div class="column is-centered has-text-centered is-widescreen">
+            <img id="face_comps" src="static/images/comparisons_iid.JPG"/>
+          </div>
+          <div class="content has-text-centered"><small>
+            Expanding the InstantID comparison chart with PhotoMaker and our own method. Since the original prompts are not public, we made a best effort to replicate them.
+            Here, we keep the column terminology employed by the original InstantID paper. Hence, IP-A refers to IP-Adapter-SDXL, IP-A FaceID* is the experimental version of IP-Adapter-SDXL-FaceID. IP-A FaceID is the IP-Adapter-SD1.5-FaceID model, and IP-A FaceID Plus is the IP-Adapter-SD1.5-FaceID-Plus model.
+          </small>
+        </div>
+
+
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="container is-max-desktop">
+
+      <div class="section-title is-centered has-text-centered">
+        <br>
+        <h2 class="title is-3">Limitations</h2>
+        
+        <div class="column is-centered has-text-centered is-widescreen">
+          <img id="face_comps" src="static/images/limitations.jpg"/>
+        </div>
+
+      </div>
+
+    <div class="content is-desktop has-text-justified">
+      <p>
+      Our model attempts to preserve accesories that are unrelated to the identity and may be unwanted in follow-up generations. Since it trains on synthetic data where the target images may be stylized, it does not always default to photorealism when not prompted for an explicit style. Finally, it still struggle with rare concepts such as extreme makeup and unusual identities.
+      </p>
+         </div>
+      <!--/ New domain editing. -->
+  </div>
+</section>
+
+<!--<section class="section" id="BibTeX">-->
+<!--  <div class="container is-max-desktop content">-->
+<!--    <h2 class="title">BibTeX</h2>-->
+<!--    <p>If you find our work useful, please cite our paper:</p>-->
+<!--    <pre><code>Coming soon-->
+<!--}</code></pre>-->
+<!--  </div>-->
+<!--</section>-->
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/abs/2302.12228">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/tuning-encoder/tuning-encoder.github.io" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Non-celebrity input images in all comparisons and limitations are under the <a rel="license" href="https://unsplash.com/license">Unsplash License</a>. Their sources are included in the Unsplash-50 list at the top of the page.
+          </p>
+          <p>
+            Website content is licensed under a <a rel="license"
+                                                href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
+            Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> project page. If you want to reuse their <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a>, please credit them appropriately.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
